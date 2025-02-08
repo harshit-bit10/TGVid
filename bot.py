@@ -17,8 +17,7 @@ logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
 
-
-class Bot (Client):
+class Bot(Client):
 
     def __init__(self):
         super().__init__(
@@ -37,10 +36,9 @@ class Bot (Client):
         self.username = me.username
         app = web.AppRunner(await web_server())
         await app.setup()
-        bind_address = "39.102.209.163"
-        await web.TCPSite(app, bind_address, Config.PORT).start()
-        logging.info(f"✅ {me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}. ✅")
+        await web.TCPSite(app, "localhost", 8080).start()  # Removed external IP and Config.PORT
 
+        logging.info(f"✅ {me.first_name} with Pyrogram v{__version__} (Layer {layer}) started on {me.username}. ✅")
 
         await self.send_message(Config.ADMIN, f"**__{me.first_name}  Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️__**")
 
@@ -51,7 +49,7 @@ class Bot (Client):
                 time = curr.strftime('%I:%M:%S %p')
                 await self.send_message(Config.LOG_CHANNEL, f"**__{me.mention} Iꜱ Rᴇsᴛᴀʀᴛᴇᴅ !!**\n\n📅 Dᴀᴛᴇ : `{date}`\n⏰ Tɪᴍᴇ : `{time}`\n🌐 Tɪᴍᴇᴢᴏɴᴇ : `Asia/Kolkata`\n\n🉐 Vᴇʀsɪᴏɴ : `v{__version__} (Layer {layer})`</b>")
             except:
-                print("Pʟᴇᴀꜱᴇ Mᴀᴋᴇ Tʜɪꜱ Iꜱ Aᴅᴍɪɴ Iɴ Yᴏᴜʀ Lᴏɢ Cʜᴀɴɴᴇʟ")
+                print("Pʟᴇᴀꜱᴇ Mᴀᴋᴇ Sᴜʀᴇ Tʜɪꜱ Bᴏᴛ Iꜱ Aᴅᴍɪɴ Iɴ Yᴏᴜʀ Lᴏɢ Cʜᴀɴɴᴇʟ")
 
     async def stop(self, *args):
         await super().stop()
